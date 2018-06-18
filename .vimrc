@@ -36,6 +36,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Visual
 Plugin 'flazz/vim-colorschemes'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'itchyny/lightline.vim' " status bar
 
 " Keybindings
 Plugin 'tpope/vim-surround' " dank text wrapping
@@ -57,4 +58,5 @@ let g:nerdtree_tabs_open_on_console_startup=1
 
 " Aesthetics 
 colorscheme Monokai
-
+set cursorline
+set cursorcolumn
