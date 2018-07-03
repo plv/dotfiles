@@ -1,5 +1,6 @@
 " Minimal .vimrc configs
-syntax on
+set cursorline
+set cursorcolumn
 set number
 set shell=bash
 set nocompatible
@@ -32,6 +33,11 @@ command W w
 autocmd VimEnter * NERDTree " Open NERDTree on startup
 autocmd VimEnter * wincmd p " Start cursor in main window
 
+
+" Plugin Config
+let g:nerdtree_tabs_open_on_console_startup=1
+
+
 " Vundle 
 filetype off " required for vundle
 
@@ -40,7 +46,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Visual
-Plugin 'flazz/vim-colorschemes'
+Plugin 'dracula/vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'itchyny/lightline.vim' " status bar
 
@@ -48,6 +54,7 @@ Plugin 'itchyny/lightline.vim' " status bar
 Plugin 'tpope/vim-surround' " dank text wrapping
 Plugin 'ervandew/supertab' " tab completion
 Plugin 'scrooloose/nerdcommenter' " commenting
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Nerdtree
 Plugin 'scrooloose/nerdtree'
@@ -59,10 +66,6 @@ Plugin 'ap/vim-css-color' " color preview in CSS
 call vundle#end()
 filetype plugin indent on
 
-" Plugin Config
-let g:nerdtree_tabs_open_on_console_startup=1
-
 " Aesthetics 
-colorscheme Monokai
-set cursorline
-set cursorcolumn
+syntax on
+colorscheme dracula
