@@ -26,6 +26,8 @@ nnoremap <C-l> <C-w>l
 nnoremap ' `
 nnoremap ` '
 
+nnoremap <leader><leader> :set relativenumber!<CR>
+
 command Q q
 command W w
 
@@ -69,3 +71,5 @@ filetype plugin indent on
 " Aesthetics 
 syntax on
 colorscheme dracula
+
+set t_Co=256
