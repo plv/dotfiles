@@ -1,6 +1,7 @@
 " Minimal .vimrc configs
 set cursorline
 set cursorcolumn
+set colorcolumn=80
 set number
 set shell=bash
 set nocompatible
@@ -65,6 +66,7 @@ Plugin 'jistr/vim-nerdtree-tabs' " Keeps NERDTree independent of tabs
 " Language Specific
 Plugin 'fatih/vim-go'
 Plugin 'ap/vim-css-color' " color preview in CSS
+Plugin 'keith/swift.vim'
 call vundle#end()
 filetype plugin indent on
 
