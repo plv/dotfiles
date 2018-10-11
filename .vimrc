@@ -67,11 +67,18 @@ Plugin 'jistr/vim-nerdtree-tabs' " Keeps NERDTree independent of tabs
 Plugin 'fatih/vim-go'
 Plugin 'ap/vim-css-color' " color preview in CSS
 Plugin 'keith/swift.vim'
+Plugin 'rust-lang/rust.vim'
 call vundle#end()
 filetype plugin indent on
 
 " Aesthetics 
 syntax on
+
+if expand('%:t') == "BUCK"
+    set syntax=python
+endif
+
 colorscheme dracula
+highlight colorcolumn ctermbg=235
 
 set t_Co=256
