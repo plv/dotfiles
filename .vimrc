@@ -72,6 +72,11 @@ filetype plugin indent on
 
 " Aesthetics 
 syntax on
+
+if expand('%:t') == "BUCK"
+    set syntax=python
+endif
+
 colorscheme dracula
 
 set t_Co=256
