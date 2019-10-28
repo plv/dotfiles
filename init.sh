@@ -26,10 +26,9 @@ install_vundle () {
 
 setup () {
     pushd "$HOME"
-    source_dir=$(dirname "$0")
+    source_dir=$(dirname "${BASH_SOURCE[0]}")
     
-    install_vundle
-    echo "$source_dir"
+    #install_vundle || true
     for file in "${DOTFILES[@]}"
     do
         check_exists "$HOME/$file" &&\
