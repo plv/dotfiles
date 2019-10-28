@@ -68,6 +68,9 @@ Plugin 'fatih/vim-go'
 Plugin 'ap/vim-css-color' " color preview in CSS
 Plugin 'keith/swift.vim'
 Plugin 'rust-lang/rust.vim'
+Plugin 'w0rp/ale'
+"Plugin 'prabirshrestha/vim-lsp'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -82,3 +85,11 @@ colorscheme dracula
 highlight colorcolumn ctermbg=235
 
 set t_Co=256
+
+if executable('sourcekit-lsp')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'sourcekit-lsp',
+        \ 'cmd': {server_info->['sourcekit-lsp']},
+        \ 'whitelist': ['swift'],
+        \ })
+endif
