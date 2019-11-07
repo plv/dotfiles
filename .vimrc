@@ -69,6 +69,7 @@ Plugin 'fatih/vim-go'
 Plugin 'ap/vim-css-color' " color preview in CSS
 Plugin 'keith/swift.vim'
 Plugin 'wlangstroth/vim-racket'
+Plugin 'rust-lang/rust.vim'
 
 " Completion and Linting
 Plugin 'vim-syntastic/syntastic'
@@ -110,6 +111,7 @@ function ToggleWriteMode(goyoleave)
         " Enable navigation of soft wraps as if they were
         " separate lines
         nnoremap j gj
+        nnoremap k gk
 
         " Quitting Goyo = quitting buffer
         nnoremap ZZ :wqa<CR>
@@ -146,4 +148,3 @@ syntax region pySnip matchgroup=Snip start="```python" end="```" contains=@PYTHO
 hi link Snip SpecialComment
 
 let g:vim_markdown_folding_disabled = 1
-
