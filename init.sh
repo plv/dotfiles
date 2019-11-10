@@ -16,8 +16,7 @@ check_exists () {
 
 install_vundle () {
     if [[ -e "$VUNDLE_DIR" ]]; then
-        echo "Error: Vundle already exists."
-        exit 1
+        echo "Vundle already exists."
     fi
 
     git clone "$VUNDLE_REPO" "$VUNDLE_DIR" &&\
@@ -25,10 +24,12 @@ install_vundle () {
 }
 
 setup () {
+    source_path=$(realpath "${BASH_SOURCE[0]}")
+    source_dir=$(dirname "$source_path")
     pushd "$HOME"
-    source_dir=$(dirname "${BASH_SOURCE[0]}")
-    
-    #install_vundle || true
+
+    install_vundle
+
     for file in "${DOTFILES[@]}"
     do
         check_exists "$HOME/$file" &&\
