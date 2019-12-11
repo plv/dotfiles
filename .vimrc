@@ -24,13 +24,18 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap ' `
 nnoremap ` '
+
+nnoremap <leader><leader> :set relativenumber!<CR>
+nnoremap <leader>t :pu!=strftime('%a %d %b %Y')<CR>
+
 command Q q
 command W w
 nnoremap 0 ^
 nnoremap ^ 0
 
-nnoremap <leader><leader> :set relativenumber!<CR>
-nnoremap <leader>t :pu!=strftime('%a %d %b %Y')<CR>
+" If I actually want to type the string "jk" i need to do jjkak :')
+imap jk <Esc>
+
 " NerdTree
 "autocmd VimEnter * NERDTree " Open NERDTree on startup
 "autocmd VimEnter * wincmd p " Start cursor in main window
