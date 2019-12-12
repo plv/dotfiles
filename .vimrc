@@ -42,7 +42,7 @@ imap jk <Esc>
 "let g:nerdtree_tabs_open_on_console_startup=1
 
 
-" Vundle 
+" Vundle
 filetype off " required for vundle
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -55,28 +55,30 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'itchyny/lightline.vim' " status bar
 
 " Keybindings
-Plugin 'tpope/vim-surround' " dank text wrapping
-Plugin 'ervandew/supertab' " tab completion
-Plugin 'scrooloose/nerdcommenter' " commenting
+Plugin 'tpope/vim-surround'
+Plugin 'ervandew/supertab'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'justinmk/vim-sneak'
 
 " Nerdtree
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs' " Keeps NERDTree independent of tabs
 
-" Syntax highlighting
+" Language support
 Plugin 'fatih/vim-go'
 Plugin 'ap/vim-css-color' " color preview in CSS
 Plugin 'keith/swift.vim'
 Plugin 'wlangstroth/vim-racket'
 Plugin 'rust-lang/rust.vim'
+Plugin 'hhvm/vim-hack'
 
 " Completion and Linting
 Plugin 'vim-syntastic/syntastic'
 Plugin 'w0rp/ale'
 Plugin 'paredit.vim'
-Plugin 'ludovicchabant/vim-gutentags'
-"Plugin 'python/black'
+"Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'python/black'
 
 " Writing mode
 Plugin 'dbmrq/vim-ditto'
@@ -85,7 +87,7 @@ Plugin 'junegunn/goyo.vim'
 call vundle#end()
 filetype plugin indent on
 
-" Aesthetics 
+" Aesthetics
 syntax on
 colorscheme gruvbox
 set t_Co=256
@@ -98,10 +100,12 @@ endif
 
 " Ale
 let g:ale_cpp_clang_options = '-std=c++14 -Wall'
-
-" Tags
-let g:gutentags_project_root = ['BUCK']
-let g:syntastic_enable_racket_racket_checker = 1
+let g:ale_fixers = {
+    \ '*': ['remove_trailing_lines', 'trim_whitespace', 'prettier'],
+    \ 'python': ['black'],
+\ }
+let g:ale_fix_on_save = 1
+"autocmd BufWriteCmd *.py ALEFix
 
 " Writing mode
 let g:write_mode = 0
@@ -146,7 +150,6 @@ endfunction
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 
-
 " Writing mode syntax highlighting
 " TODO make these work in markdown files only
 syntax include @CPP syntax/cpp.vim
@@ -169,4 +172,18 @@ if $TERM == "xterm-kitty"
     let &t_ti = &t_ti . "\033]10;#f6f3e8\007\033]11;#242424\007"
     let &t_te = &t_te . "\033]110\007\033]111\007"
     set background=dark
+endif
+
+" Hack things
+if v:version >= 800
+  let g:ale_completion_enabled = 1
+  nnoremap <silent> K :ALEHover<CR>
+  nnoremap <silent> gd :ALEGoToDefinition<CR>
+  nnoremap <M-LeftMouse> <LeftMouse>:ALEGoToDefinition<CR>
+
+  " show type on hover
+  if v:version >= 801
+    set balloonevalterm
+    let g:ale_set_balloons = 1
+  endif
 endif
