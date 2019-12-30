@@ -73,10 +73,10 @@ Plugin 'wlangstroth/vim-racket'
 Plugin 'rust-lang/rust.vim'
 Plugin 'hhvm/vim-hack'
 
-" Completion and Linting
+" Completion, linting, and syntax magic
 Plugin 'w0rp/ale'
 Plugin 'paredit.vim'
-"Plugin 'ludovicchabant/vim-gutentags'
+"Plugin 'ludovicchabant/vim-gutentags' TODO fix this
 Plugin 'python/black'
 
 " Writing mode
@@ -172,18 +172,4 @@ if $TERM == "xterm-kitty"
     let &t_ti = &t_ti . "\033]10;#f6f3e8\007\033]11;#242424\007"
     let &t_te = &t_te . "\033]110\007\033]111\007"
     set background=dark
-endif
-
-" Hack things
-if v:version >= 800
-  let g:ale_completion_enabled = 1
-  nnoremap <silent> K :ALEHover<CR>
-  nnoremap <silent> gd :ALEGoToDefinition<CR>
-  nnoremap <M-LeftMouse> <LeftMouse>:ALEGoToDefinition<CR>
-
-  " show type on hover
-  if v:version >= 801
-    set balloonevalterm
-    let g:ale_set_balloons = 1
-  endif
 endif
