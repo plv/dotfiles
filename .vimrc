@@ -74,7 +74,6 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'hhvm/vim-hack'
 
 " Completion and Linting
-Plugin 'vim-syntastic/syntastic'
 Plugin 'w0rp/ale'
 Plugin 'paredit.vim'
 "Plugin 'ludovicchabant/vim-gutentags'
@@ -159,6 +158,7 @@ hi link Snip SpecialComment
 syntax include @PYTHON syntax/python.vim
 syntax region pySnip matchgroup=Snip start="```python" end="```" contains=@PYTHON
 hi link Snip SpecialComment
+
 
 let g:vim_markdown_folding_disabled = 1
 
