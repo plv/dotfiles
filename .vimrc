@@ -26,7 +26,9 @@ nnoremap ' `
 nnoremap ` '
 
 nnoremap <leader><leader> :set relativenumber!<CR>
-nnoremap <leader>t :pu!=strftime('%a %d %b %Y')<CR>
+nnoremap <leader>t :pu!=strftime('= %a %d %b %Y =')<CR>ji
+
+
 
 command Q q
 command W w
@@ -82,6 +84,7 @@ Plugin 'python/black'
 " Writing mode
 Plugin 'dbmrq/vim-ditto'
 Plugin 'junegunn/goyo.vim'
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
 filetype plugin indent on
@@ -107,19 +110,7 @@ let g:ale_fix_on_save = 1
 "autocmd BufWriteCmd *.py ALEFix
 
 " Writing mode
-let g:write_mode = 0
-function ToggleWriteMode()
-    if !g:write_mode
-        Goyo
-        let g:write_mode = 1
-    else
-        Goyo
-        let g:write_mode = 0
-    endif
-endfunction
-nnoremap <leader>w :call ToggleWriteMode()<CR>
-nnoremap <leader>d :Ditto<CR>
-
+let g:vimwiki_list = [{'path': '~/notes/'}]
 
 function! s:goyo_enter()
     let g:write_mode = 1
@@ -146,18 +137,6 @@ function! s:goyo_leave()
     unmap ZZ
     cunmap q
 endfunction
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
-
-" Writing mode syntax highlighting
-" TODO make these work in markdown files only
-syntax include @CPP syntax/cpp.vim
-syntax region cppSnip matchgroup=Snip start="```cpp" end="```" contains=@CPP
-hi link Snip SpecialComment
-
-syntax include @PYTHON syntax/python.vim
-syntax region pySnip matchgroup=Snip start="```python" end="```" contains=@PYTHON
-hi link Snip SpecialComment
 
 
 let g:vim_markdown_folding_disabled = 1
