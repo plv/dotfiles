@@ -25,25 +25,19 @@ nnoremap <C-l> <C-w>l
 nnoremap ' `
 nnoremap ` '
 
+" Simple relative toggle
 nnoremap <leader><leader> :set relativenumber!<CR>
+
+" Various note-taking utilities
 nnoremap <leader>d :pu!=strftime('= %a %d %b %Y =')<CR>ji
 nnoremap <leader>t :pu!=strftime('== %X  ==')<CR>ji
 nnoremap <leader>g :Goyo<CR>
 
-" If I actually want to type the string "jk" i need to do jjkak :')
-imap jk <Esc>
-
 " Russian character mappings so that I can take Russian notes more efficiently.
-" I'm using a phonetic ЯШЕРТЫ keyboard that doesn't have a standardized layout, however.
-" The best longterm solution would be to learn to type on the standard ЙЦУКЕН keyboard.
-" TODO: Move these out somewhere else and learn to type on a big boy
-" keyboard.
-nnoremap ф f
-nnoremap х h
-nnoremap й j
-nnoremap к k
-nnoremap л l
-nnoremap А A
+" This isn't a toggle because I'm too lazy to make it such.
+nnoremap <leader>r :set keymap=russian-jcukenwin<CR>
+" This however, is a toggle once <leader>r is activated for the first time.
+nnoremap <leader>f a<C-^>
 
 command Q q
 command W w
