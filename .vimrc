@@ -25,22 +25,24 @@ nnoremap <C-l> <C-w>l
 nnoremap ' `
 nnoremap ` '
 
+" Simple relative toggle
 nnoremap <leader><leader> :set relativenumber!<CR>
-nnoremap <leader>t :pu!=strftime('%a %d %b %Y')<CR>
+
+" Various note-taking utilities
+nnoremap <leader>d :pu!=strftime('= %a %d %b %Y =')<CR>ji
+nnoremap <leader>t :pu!=strftime('== %X  ==')<CR>ji
+nnoremap <leader>g :Goyo<CR>
+
+" Russian character mappings so that I can take Russian notes more efficiently.
+" This isn't a toggle because I'm too lazy to make it such.
+nnoremap <leader>r :set keymap=russian-jcukenwin<CR>
+" This however, is a toggle once <leader>r is activated for the first time.
+nnoremap <leader>f a<C-^>
 
 command Q q
 command W w
 nnoremap 0 ^
 nnoremap ^ 0
-
-" If I actually want to type the string "jk" i need to do jjkak :')
-imap jk <Esc>
-
-" NerdTree
-"autocmd VimEnter * NERDTree " Open NERDTree on startup
-"autocmd VimEnter * wincmd p " Start cursor in main window
-"let g:nerdtree_tabs_open_on_console_startup=1
-
 
 " Vundle
 filetype off " required for vundle
@@ -73,16 +75,15 @@ Plugin 'wlangstroth/vim-racket'
 Plugin 'rust-lang/rust.vim'
 Plugin 'hhvm/vim-hack'
 
-" Completion and Linting
-Plugin 'vim-syntastic/syntastic'
+" Completion, linting, and syntax magic
 Plugin 'w0rp/ale'
 Plugin 'paredit.vim'
-"Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'python/black'
 
 " Writing mode
 Plugin 'dbmrq/vim-ditto'
 Plugin 'junegunn/goyo.vim'
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
 filetype plugin indent on
@@ -108,19 +109,7 @@ let g:ale_fix_on_save = 1
 "autocmd BufWriteCmd *.py ALEFix
 
 " Writing mode
-let g:write_mode = 0
-function ToggleWriteMode()
-    if !g:write_mode
-        Goyo
-        let g:write_mode = 1
-    else
-        Goyo
-        let g:write_mode = 0
-    endif
-endfunction
-nnoremap <leader>w :call ToggleWriteMode()<CR>
-nnoremap <leader>d :Ditto<CR>
-
+let g:vimwiki_list = [{'path': '~/notes/'}]
 
 function! s:goyo_enter()
     let g:write_mode = 1
@@ -147,18 +136,7 @@ function! s:goyo_leave()
     unmap ZZ
     cunmap q
 endfunction
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-
-" Writing mode syntax highlighting
-" TODO make these work in markdown files only
-syntax include @CPP syntax/cpp.vim
-syntax region cppSnip matchgroup=Snip start="```cpp" end="```" contains=@CPP
-hi link Snip SpecialComment
-
-syntax include @PYTHON syntax/python.vim
-syntax region pySnip matchgroup=Snip start="```python" end="```" contains=@PYTHON
-hi link Snip SpecialComment
 
 let g:vim_markdown_folding_disabled = 1
 
@@ -172,18 +150,4 @@ if $TERM == "xterm-kitty"
     let &t_ti = &t_ti . "\033]10;#f6f3e8\007\033]11;#242424\007"
     let &t_te = &t_te . "\033]110\007\033]111\007"
     set background=dark
-endif
-
-" Hack things
-if v:version >= 800
-  let g:ale_completion_enabled = 1
-  nnoremap <silent> K :ALEHover<CR>
-  nnoremap <silent> gd :ALEGoToDefinition<CR>
-  nnoremap <M-LeftMouse> <LeftMouse>:ALEGoToDefinition<CR>
-
-  " show type on hover
-  if v:version >= 801
-    set balloonevalterm
-    let g:ale_set_balloons = 1
-  endif
 endif
