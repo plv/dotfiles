@@ -2,7 +2,7 @@
 
 # Initial dotfile and soft-link setup
 
-DOTFILES=(".vimrc" ".tmux.conf")
+DOTFILES=(".vimrc" ".tmux.conf" ".zshrc")
 
 VUNDLE_REPO="https://github.com/VundleVim/Vundle.vim.git"
 VUNDLE_DIR="$HOME/.vim/bundle/Vundle.vim"
