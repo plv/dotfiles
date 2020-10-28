@@ -43,7 +43,6 @@ setopt COMPLETE_IN_WORD
 
 
 # Aliases and functions
-
 ## General
 up() {
     if [ -z "$1" ]; then
@@ -56,4 +55,22 @@ up() {
 ## Vimwiki/Notes
 diary () {
     vim ~/notes/diary/$(date "+%Y-%m-%d.wiki")
+}
+
+### qn (QuickNote) -  a dispoable note made in /tmp that is copied to clipboard
+### after exiting.
+qn() {
+    todaydir="/tmp/qn-$(date '+%Y-%m-%d')"
+    if [ ! -d "$todaydir" ]; then
+        mkdir "$todaydir"
+    fi
+
+    notepath="$todaydir/$(date +%s).wiki"
+    "$EDITOR" "$notepath"
+    case "$(uname -s)" in
+        Linux*) cmd='xclip -i -selection clipboard';;
+        Darwin*) cmd='pbcopy';;
+        *) exit 1
+    esac
+    cat "$notepath" | eval "$cmd"
 }
