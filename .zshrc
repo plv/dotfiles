@@ -54,7 +54,16 @@ up() {
 
 ## Vimwiki/Notes
 diary () {
-    vim ~/notes/diary/$(date "+%Y-%m-%d.wiki")
+    today=~/notes/diary/$(date "+%Y-%m-%d.wiki")
+    if [ "$EDITOR" = "vim" ] || [ "$EDITOR" = "nvim" ] && [ ! -s "$today" ]
+    then
+        # Insert a date at the top
+        # Note that this assumes that if (n)vim is available, then my dotfiles
+        # are already set up.
+        "$EDITOR" -c "normal ,d" "$today"
+    else
+        "$EDITOR" "$today"
+    fi
 }
 
 ### qn (QuickNote) -  a dispoable note made in /tmp that is copied to clipboard
@@ -72,5 +81,6 @@ qn() {
         Darwin*) cmd='pbcopy';;
         *) exit 1
     esac
-    cat "$notepath" | eval "$cmd"
+    echo "$cmd"
+    (cat "$notepath" 2>&1 2>/dev/null || ;) | eval "$cmd"
 }
