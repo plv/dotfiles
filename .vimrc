@@ -73,6 +73,7 @@ nnoremap 0 ^
 nnoremap ^ 0
 
 nnoremap <leader><leader> :set relativenumber!<CR>
+nnoremap <leader>h :set nohlsearch!<CR>
 
 "" Russian keybindings
 """ Russian character mappings so that I can take Russian notes more
